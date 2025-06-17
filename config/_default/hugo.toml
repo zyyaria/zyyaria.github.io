@@ -64,7 +64,7 @@ mainSections = []
       # 是否设置为功能类似于草稿文章/页面的草稿菜单项
       draft = false
       # 修复 0.2.16 |新增功能 将 fontawesome 图标添加到特定菜单项
-      # icon = "fa-solid fa-archive"
+      icon = "fa-solid fa-archive"
       # 修复 0.2.16 |新 菜单项类型，可选值：[“mobile”， “desktop”]
       type = ""
       # 修复 0.3.9 |NEW 是否显示子菜单项分隔线
@@ -79,7 +79,7 @@ mainSections = []
     title = ""
     weight = 2
     [menu.main.params]
-      # icon = "fa-solid fa-folder-tree"
+      icon = "fa-solid fa-folder-tree"
   [[menu.main]]
     identifier = "collections"
     parent = ""
@@ -90,7 +90,7 @@ mainSections = []
     title = ""
     weight = 2
     [menu.main.params]
-      # icon = "fa-solid fa-folder-tree"
+      icon = "fa-solid fa-layer-group fa-fw me-1"
   # [[menu.main]]
     # identifier = "tags"
     # parent = ""
