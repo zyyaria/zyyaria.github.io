@@ -1,0 +1,1345 @@
+# =====================================================================================
+# 建议使用 Alternate Theme Config 配置 FixIt
+# 修改此文件可能会导致合并冲突
+# 目前主题组件可以配置的内容有一些限制：
+# 参数、菜单、outputformats 和 mediatypes
+# =====================================================================================
+
+# -------------------------------------------------------------------------------------
+# Hugo 配置
+# 参见：https://gohugo.io/getting-started/configuration/
+# -------------------------------------------------------------------------------------
+
+# 网站标题
+title = "AriaNote · 温故知新"
+# 根的主机名（和路径）
+baseURL = "https://zyyaria.github.io/"
+# 主题列表
+# theme = [“FixIt”] # 在你的站点配置文件中启用
+# 确定默认内容语言 [“en”， “zh-cn”， “fr”， “pl”， ...]
+defaultContentLanguage = "zh-cn"
+# 语言代码 [“en”， “zh-CN”， “fr”， “pl”， ...]
+languageCode = "zh-CN"
+# 语言名称 [“English”， “简体中文”， “Français”， “Polski”， ...]
+languageName = "简体中文"
+# 是否包含中文/日文/韩文
+hasCJKLanguage = false
+# 每页默认帖子数量
+[pagination]      # 原 paginate = 12 语法已弃用
+  pagerSize = 12
+# 仅用于 SEO Schema 的版权描述
+copyright = ""
+# 是否使用 robots.txt
+enableRobotsTXT = true
+# 是否使用 git commit log
+enableGitInfo = true
+# 是否使用 Emoji 码
+enableEmoji = true
+# 网站的主要部分
+mainSections = []
+
+# -------------------------------------------------------------------------------------
+# 菜单配置
+# 请参见：https://fixit.lruihao.cn/documentation/basics/#menu-configuration
+# -------------------------------------------------------------------------------------
+
+
+[menu]
+  [[menu.main]]
+    identifier = "archives"
+    parent = ""
+    # 您可以在名称前添加额外的信息（支持 HTML 格式），例如图标
+    pre = ""
+    # 您可以在名称后添加额外的信息（支持 HTML 格式），例如图标
+    post = ""
+    name = "归档"
+    url = "/archives/"
+    # 将鼠标悬停在此菜单链接上时会显示标题
+    title = ""
+    weight = 1
+    # 修复 0.2.14 |新增功能 将用户定义的内容添加到菜单项
+    [menu.main.params]
+      # 将 CSS 类添加到特定菜单项
+      class = ""
+      # 是否设置为功能类似于草稿文章/页面的草稿菜单项
+      draft = false
+      # 修复 0.2.16 |新增功能 将 fontawesome 图标添加到特定菜单项
+      # icon = "fa-solid fa-archive"
+      # 修复 0.2.16 |新 菜单项类型，可选值：[“mobile”， “desktop”]
+      type = ""
+      # 修复 0.3.9 |NEW 是否显示子菜单项分隔线
+      divided = false
+  [[menu.main]]
+    identifier = "categories"
+    parent = ""
+    pre = ""
+    post = ""
+    name = "分类"
+    url = "/categories/"
+    title = ""
+    weight = 2
+    [menu.main.params]
+      # icon = "fa-solid fa-folder-tree"
+  [[menu.main]]
+    identifier = "collections"
+    parent = ""
+    pre = ""
+    post = ""
+    name = "合集"
+    url = "/collections/"
+    title = ""
+    weight = 2
+    [menu.main.params]
+      # icon = "fa-solid fa-folder-tree"
+  # [[menu.main]]
+    # identifier = "tags"
+    # parent = ""
+    # pre = ""
+    # post = ""
+    # name = "Tags"
+    # url = "/tags/"
+    # title = ""
+    # weight = 3
+    # [menu.main.params]
+      # icon = "fa-solid fa-tags"
+
+# -------------------------------------------------------------------------------------
+# 相关内容配置
+# 参见：https://gohugo.io/content-management/related/
+# -------------------------------------------------------------------------------------
+
+[related]
+  includeNewer = false
+  threshold = 80
+  toLower = false
+[[related.indices]]
+  applyFilter = false
+  cardinalityThreshold = 0
+  name = 'keywords'
+  pattern = ''
+  toLower = false
+  type = 'basic'
+  weight = 100
+[[related.indices]]
+  applyFilter = false
+  cardinalityThreshold = 0
+  name = 'date'
+  pattern = ''
+  toLower = false
+  type = 'basic'
+  weight = 10
+[[related.indices]]
+  applyFilter = false
+  cardinalityThreshold = 0
+  name = 'tags'
+  pattern = ''
+  toLower = false
+  type = 'basic'
+  weight = 80
+[[related.indices]]
+  applyFilter = false
+  name = 'fragmentrefs'
+  type = 'fragments'
+  weight = 80
+
+# -------------------------------------------------------------------------------------
+# 模块配置
+# 参见：https://gohugo.io/hugo-modules/configuration/#module-config-imports
+# -------------------------------------------------------------------------------------
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.146.0"
+
+# -------------------------------------------------------------------------------------
+# Hugo 中与标记相关的配置
+# 参见：https://gohugo.io/getting-started/configuration-markup/
+# -------------------------------------------------------------------------------------
+
+[markup]
+  # 语法高亮（https://gohugo.io/content-management/syntax-highlighting）
+  [markup.highlight]
+   ########## 必要的配置##########
+    # https://github.com/hugo-fixit/FixIt/issues/43
+    codeFences = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    ########## 必要的配置##########
+    guessSyntax = true
+  # Goldmark 来自 Hugo 0.60，这是 Markdown 的默认库
+  # https://gohugo.io/getting-started/configuration-markup/#goldmark
+  [markup.goldmark]
+    duplicateResourceFiles = false
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      linkifyProtocol = 'https'
+      strikethrough = false
+      table = true
+      taskList = true
+      typographer = true
+      # https://gohugo.io/getting-started/configuration-markup/#extras
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.delete]
+          enable = true
+        [markup.goldmark.extensions.extras.insert]
+          enable = true
+        [markup.goldmark.extensions.extras.mark]
+          enable = true
+        [markup.goldmark.extensions.extras.subscript]
+          enable = true
+        [markup.goldmark.extensions.extras.superscript]
+          enable = true
+    # TODO 直通重构 https://gohugo.io/render-hooks/passthrough/
+    # TODO hugo 0.122.0 https://gohugo.io/content-management/mathematics/
+    # [markup.goldmark.extensions.passthrough]
+    #   enable = true
+    #   [markup.goldmark.extensions.passthrough.delimiters]
+    #     block = [['\[', '\]'], ['$$', '$$']]
+    #     inline = [['\(', '\)'], ['$', '$']]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+    [markup.goldmark.renderer]
+      hardWraps = false
+      # 是否直接在文档中使用 HTML 标签
+      unsafe = true
+      xhtml = false
+
+# -------------------------------------------------------------------------------------
+# 站点地图配置
+# 参见：https://gohugo.io/templates/sitemap-template/#configuration
+# -------------------------------------------------------------------------------------
+
+[sitemap]
+  changefreq = "weekly"
+  disable = false
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# -------------------------------------------------------------------------------------
+# 永久链接配置
+# 参见：https://gohugo.io/content-management/urls/#permalinks
+# -------------------------------------------------------------------------------------
+
+[Permalinks]
+  posts = ":contentbasename"
+  # posts = ":year/:month/:filename"
+  # posts = "posts/:slugorfilename"
+
+# -------------------------------------------------------------------------------------
+# 隐私配置
+# 参见：https://gohugo.io/about/hugo-and-gdpr/
+# -------------------------------------------------------------------------------------
+
+[privacy]
+  [privacy.x]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+# -------------------------------------------------------------------------------------
+# 媒体类型
+# 参见：https://gohugo.io/templates/output-formats/#media-types
+# -------------------------------------------------------------------------------------
+
+[mediaTypes]
+  # [mediaTypes."application/feed+json"]
+  #   suffixes = ["json"]
+
+# -------------------------------------------------------------------------------------
+# 输出格式定义
+# 参见：https://gohugo.io/templates/output-formats/#output-format-definitions
+# -------------------------------------------------------------------------------------
+
+[outputFormats]
+  # 修复 0.3.0 |新增 用于制作输出 /archives/index.html 文件的选项
+  [outputFormats.archives]
+    path = "archives"
+    baseName = "index"
+    mediaType = "text/html"
+    isPlainText = false
+    isHTML = true
+    permalinkable = true
+    notAlternative = true
+  # 修复 0.3.0 |新增 制作输出 /offline/index.html 文件的选项
+  [outputFormats.offline]
+    path = "offline"
+    baseName = "index"
+    mediaType = "text/html"
+    isPlainText = false
+    isHTML = true
+    permalinkable = true
+    notAlternative = true
+  # 修复 0.3.0 |新增 将输出设 readme.md 文件的选项
+  [outputFormats.readme]
+    baseName = "readme"
+    mediaType = "text/markdown"
+    isPlainText = true
+    isHTML = false
+    notAlternative = true
+  # 修复 0.3.0 |CHANGED 将输出设 baidu_urls.txt 文件的选项
+  [outputFormats.baidu_urls]
+    baseName = "baidu_urls"
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
+    notAlternative = true
+  # 修复 0.3.10 |新增 将输出设为 search.json 文件的选项
+  [outputFormats.search]
+    baseName = "search"
+    mediaType = "application/json"
+    rel = "search"
+    isPlainText = true
+    isHTML = false
+    permalinkable = true
+
+# -------------------------------------------------------------------------------------
+# 自定义输出格式
+# 参见：https://gohugo.io/templates/output-formats/#customizing-output-formats
+# -------------------------------------------------------------------------------------
+
+# 选项（Options）制作 hugo 输出文件，可选值如下：
+# home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
+# page = ["html", "markdown"]
+# section = ["html", "rss"]
+# taxonomy = ["html"]
+# term = ["html", "rss"]
+[outputs]
+  home = ["html", "rss", "archives", "offline", "search"]
+  page = ["html", "markdown"]
+  section = ["html", "rss"]
+  taxonomy = ["html"]
+  term = ["html", "rss"]
+
+# -------------------------------------------------------------------------------------
+# 分类法配置
+# 参见：https://gohugo.io/content-management/taxonomies/#configure-taxonomies
+# -------------------------------------------------------------------------------------
+
+[taxonomies]
+  category = "categories"
+  # tag = "tags"
+  collection = "collections"
+
+# -------------------------------------------------------------------------------------
+# 主题核心配置
+# 参见：https://fixit.lruihao.cn/documentation/basics/#theme-configuration
+# -------------------------------------------------------------------------------------
+
+[params]
+  # 修复 0.2.15 |已更改 FixIt 主题版本
+  version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
+  # 网站描述
+  description = ""
+  # 网站关键词
+  keywords = []
+  # 网站默认主题 [“light”， “dark”， “auto”]
+  defaultTheme = "auto"
+  # 哪个哈希函数用于 SRI，为空时不使用 SRI
+  # ["sha256", "sha384", "sha512", "md5"]
+  fingerprint = ""
+  # 新的日期格式
+  dateFormat = "2006-01-02"
+  # Open Graph 和 Twitter Cards 的网站图片
+  images = []
+  # 修复 0.2.12 |新增 启用 PWA
+  enablePWA = true
+  # 修复 0.2.14 |新增是否自动为外部链接添加外部图标
+  externalIcon = false
+  # 修复 0.3.13 |NEW 是否将标题大写
+  capitalizeTitles = true
+  # 修复 0.3.0 |NEW 是否将网站标题添加到每个页面的标题中
+  # 记得在 'hugo.toml' 中设置你的网站标题（例如 title = “title”）
+  withSiteTitle = true
+  # 修复 0.3.0 |将网站标题添加到每个页面的标题时的新标题分隔符
+  titleDelimiter = "-"
+  # 修复 0.3.0 |NEW 是否在索引页标题中添加站点副标题
+  # 记得用 'params.header.subtitle.name' 设置你的网站副标题
+  indexWithSubtitle = false
+  # 修复 0.3.13 |NEW 是否以纯文本形式显示摘要
+  summaryPlainify = false
+  # 修复 0.2.14 |NEW 默认情况下，FixIt 将仅在主页的 HTML 头中注入主题元标记。
+  # 您可以关闭它，但如果您不这样做，我们将不胜感激，因为这是观看 FixIt 人气上升的好方法。
+  disableThemeInject = false
+
+  # 作者配置
+  [params.author]
+    name = "Aria"
+    email = "zyyaria@qq.com"
+    link = "https://zyyaria.github.io/"
+    avatar = "/avatar.png"
+
+  # 修复 0.3.0 |只有 enableGitInfo 为 true 时，才有新的公共 Git 仓库信息
+  [params.gitInfo]
+    # 例如“https://github.com/hugo-fixit/docs”
+    repo = "https://github.com/zyyaria/zyyaria.github.io"
+    branch = "main"
+    # 相对于存储库根目录的内容目录路径
+    dir = "content"
+    # 报告帖子 issue 的 Issue 模板
+    # 可用的模板参数： {title} {URL} {sourceURL}
+    issueTpl = "title=[BUG]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|URL|{URL}|%0A|Filename|{sourceURL}|"
+
+  # App 图标配置
+  [params.app]
+    # 添加到 iOS 主屏幕或 Android 启动器时，应用程序的可选站点标题覆盖
+    title = "AriaNote"
+    # 是否省略网站图标资源链接
+    noFavicon = false
+    # 用于替代旧式 .png 和 .ico 文件的现代 SVG 网站图标
+    svgFavicon = "/favicon.svg"
+    # Safari 遮罩图标颜色
+    iconColor = "#5bbad5"
+    # Windows v8-10 瓦片颜色
+    tileColor = "#da532c"
+    # 修复 0.2.12 |更改了 Android 浏览器主题颜色
+    [params.app.themeColor]
+      light = "#f8f8f8"
+      dark = "#252627"
+
+  # 搜索配置
+  [params.search]
+    enable = true
+    # 搜索引擎类型 [“algolia”， “fuse”， “cse”， “post-chat”]
+    type = "fuse"
+    # 分块内容的最大索引长度
+    contentLength = 4000
+    # 搜索栏的占位符
+    placeholder = ""
+    # 最大结果长度数
+    maxResultLength = 10
+    # 结果的片段长度
+    snippetLength = 30
+    # 结果中高亮部分的 HTML 标签名称
+    highlightTag = "em"
+    # 是否在搜索索引中使用基于 baseURL 的绝对 URL
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
+    [params.search.fuse]
+      # 修复 0.2.17 |新 https://fusejs.io/api/options.html
+      isCaseSensitive = false
+      minMatchCharLength = 2
+      findAllMatches = false
+      location = 0
+      threshold = 0.3
+      distance = 100
+      ignoreLocation = false
+      useExtendedSearch = false
+      ignoreFieldNorm = false
+
+  # 修复 0.3.16 |新的自定义搜索引擎（CSE）
+  [params.cse]
+    # 搜索引擎： [“google”， “bing”]
+    engine = ""
+    # 搜索结果页 URL（layout：search）
+    resultsPage = "/search/"
+    # Google：https://programmablesearchengine.google.com/
+    # Google 自定义搜索引擎上下文
+    [params.cse.google]
+      cx = ""
+    # 必应（不支持）：https://www.customsearch.ai/
+    [params.cse.bing]
+
+  # Header 配置
+  [params.header]
+    # 修复 0.2.13 |已更改桌面标头模式 [“sticky”， “normal”， “auto”]
+    desktopMode = "sticky"
+    # 修复 0.2.13 |已更改的移动标头模式 [“sticky”， “normal”， “auto”]
+    mobileMode = "auto"
+    # header title 配置
+    [params.header.title]
+      # LOGO 的 URL
+      logo = "/favicon.svg"
+      # 标题名称
+      name = "AriaNote"
+      # 您可以在名称前添加额外的信息（支持 HTML 格式），例如图标
+      pre = ""
+      # 您可以在名称后添加额外的信息（支持 HTML 格式），例如图标
+      post = ""
+      # 标题名称是否使用 Typeit 动画
+      typeit = false
+    # 修复 0.2.12 |NEW Header 字幕配置
+    [params.header.subtitle]
+      # 字幕名称
+      name = ""
+      # 字幕名称是否使用 Typeit 动画
+      typeit = false
+
+  # 修复 0.2.18 |新的 Breadcrumb 配置
+  [params.breadcrumb]
+    enable = false
+    sticky = false
+    showHome = false
+    # 修复 0.3.13 |新增功能
+    separator = "/"
+    capitalize = true
+
+  # 修复 0.3.10 |新的 文章导航配置
+  [params.navigation]
+    # 是否在 Section Pages 范围内显示文章导航
+    inSection = false
+    # 是否反转下一篇文章/上一篇文章的导航顺序
+    reverse = false
+
+  # 页脚配置
+  [params.footer]
+    enable = true
+    # 是否显示版权信息
+    copyright = true
+    # 是否显示作者
+    author = true
+    # 网站创建年份
+    since = "2025"
+    # 修复 0.2.12 |全新 仅在中国提供公共网络安全（支持 HTML 格式）
+    gov = ""
+    # 仅限中国的 ICP 信息（支持 HTML 格式）
+    icp = ""
+    # 许可证信息（支持 HTML 格式）
+    license = ""
+    # 修复 0.3.0 |新增是否显示 Hugo 和主题信息
+    [params.footer.powered]
+      enable = true
+      hugoLogo = true
+      themeLogo = true
+    # 修复 0.2.17 |已更改 站点创建时间
+    [params.footer.siteTime]
+      enable = false
+      animate = true
+      icon = "fa-solid fa-heartbeat"
+      pre = ""
+      value = "" # 例如“2021-12-18T16:15:22 08:00”
+    # 修复 0.2.17 |新的页脚行顺序，可选值：[“first”，0，1，2，3，4，5， “last”]
+    [params.footer.order]
+      powered = 0
+      copyright = 0
+      statistics = 0
+      visitor = 0
+      beian = 0
+
+  # 修复 0.3.0 |新 档案页面配置（所有帖子类型的页面）
+  [params.archives]
+    # 档案页面中的特殊帖子数量
+    paginate = 20
+    # 日期格式（月和日）
+    dateFormat = "01-02"
+
+  # 章节页面配置（章节中的所有页面）
+  [params.section]
+    # 每个部分页面的特殊页数
+    paginate = 20
+    # 日期格式（月和日）
+    dateFormat = "01-02"
+    # 修复 0.3.10 |新增 RSS、Atom 和 JSON 源的 Section Feed 配置。
+    [params.section.feed]
+      # 要包含在源中的帖子数。如果设置为 -1，则所有帖子。
+      limit = -1
+      # 是否在 Feed 中显示全文内容。
+      fullText = false
+
+  # 术语列表（类别或标签）页面配置
+  [params.list]
+    # 每个列表页中的特殊数量的帖子
+    paginate = 20
+    # 日期格式（月和日）
+    dateFormat = "01-02"
+    # 修复 0.3.10 |新增 RSS、Atom 和 JSON 源的术语列表源配置。
+    [params.list.feed]
+      # 要包含在源中的帖子数。如果设置为 -1，则所有帖子。
+      limit = -1
+      # 是否在 Feed 中显示全文内容。
+      fullText = false
+
+  # 修复 0.3.13 |新增档案、章节和术语列表的最近更新的页面配置
+  [params.recentlyUpdated]
+    archives = true
+    section = true
+    list = true
+    days = 30
+    maxCount = 10
+
+  # 修复 0.2.17 |新的 tags 页面的 TagCloud 配置
+  [params.tagcloud]
+    enable = false
+    min = 14 # 最小字体大小（以 px 为单位）
+    max = 32 # 最大字体大小（以 px 为单位）
+    peakCount = 10 # 每个标签的最大帖子数
+    orderby = "name" # 标签顺序，可选值： [“name”， “count”]
+
+  # 首页配置
+  [params.home]
+    # 首页简介
+    [params.home.profile]
+      enable = true
+      # 首页首选头像的 Gravatar Email
+      gravatarEmail = ""
+      # 首页显示的头像 URL
+      avatarURL = "/avatar.png"
+      # 修复 0.2.17 |头像菜单链接的新标识符
+      avatarMenu = ""
+      # 首页显示标题（支持 HTML 格式）
+      title = "Aria"
+      # 首页显示字幕（支持 HTML 格式）
+      subtitle = "假如再碰不见你们，祝你们早安、午安、晚安。"
+      # 字幕是否使用 Typeit 动画
+      typeit = true
+      # 是否显示社交链接
+      social = true
+      # 免责声明（支持 HTML 格式）
+      disclaimer = ""
+    # 首页帖子
+    [params.home.posts]
+      enable = true
+      # 每个主页帖子页面中的特殊帖子数量
+      paginate = 12
+
+  # 修复 0.2.16 |更改了关于作者的社交配置
+  [params.social]
+    GitHub = "zyyaria"
+    Linkedin = ""
+    Twitter = ""
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
+    Medium = ""
+    Gitlab = ""
+    Youtubelegacy = ""
+    Youtubecustom = ""
+    Youtubechannel = ""
+    Tumblr = ""
+    Quora = ""
+    Keybase = ""
+    Pinterest = ""
+    Reddit = ""
+    Codepen = ""
+    FreeCodeCamp = ""
+    Bitbucket = ""
+    Stackoverflow = ""
+    Weibo = ""
+    Odnoklassniki = ""
+    VK = ""
+    Flickr = ""
+    Xing = ""
+    Snapchat = ""
+    Soundcloud = ""
+    Spotify = ""
+    Bandcamp = ""
+    Paypal = ""
+    Fivehundredpx = ""
+    Mix = ""
+    Goodreads = ""
+    Lastfm = ""
+    Foursquare = ""
+    Hackernews = ""
+    Kickstarter = ""
+    Patreon = ""
+    Steam = ""
+    Twitch = ""
+    Strava = ""
+    Skype = ""
+    Whatsapp = ""
+    Zhihu = ""
+    Douban = ""
+    Angellist = ""
+    Slidershare = ""
+    Jsfiddle = ""
+    Deviantart = ""
+    Behance = ""
+    Dribbble = ""
+    Wordpress = ""
+    Vine = ""
+    Googlescholar = ""
+    Researchgate = ""
+    Mastodon = ""
+    Thingiverse = ""
+    Devto = ""
+    Gitea = ""
+    XMPP = ""
+    Matrix = ""
+    Bilibili = ""
+    ORCID = ""
+    Liberapay = ""
+    Ko-Fi = ""
+    BuyMeaCoffee = ""
+    Linktree = ""
+    QQ = ""
+    QQGroup = "" # https://qun.qq.com/join.html
+    Diaspora = ""
+    CSDN = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
+    Pleroma = ""
+    Kaggle = ""
+    MediaWiki= ""
+    Plume = ""
+    HackTheBox = ""
+    RootMe = ""
+    Feishu = ""
+    TryHackMe = ""
+    Douyin = ""
+    TikTok = ""
+    Credly = ""
+    Bluesky = ""
+    Phone = ""
+    Email = "zyyaria@qq.com"
+    RSS = true
+    # 自定义社交链接，如下所示
+    # [params.social.twitter]
+    #   id = "lruihao"
+    #   weight = 3
+    #   prefix = "https://twitter.com/"
+    #   Title = "Twitter"
+    #   [social.twitter.icon]
+    #     class = "fa-brands fa-x-twitter fa-fw"
+
+  # TypeIt 配置
+  [params.typeit]
+    # 每步之间的打字速度（以毫秒为单位）
+    speed = 100
+    # 光标的闪烁速度（以毫秒为单位）
+    cursorSpeed = 1000
+    # 用于光标的字符（支持 HTML 格式）
+    cursorChar = "|"
+    # 键入完成后的光标持续时间（以毫秒为单位，“-1”表示无限）
+    duration = -1
+    # 修复 0.2.18 |NEW 您的字符串在完成后是否会持续循环
+    loop = false
+
+  # 修复 0.2.15 |新的 Mermaid 配置
+  [params.mermaid]
+    # 取值见 https://mermaid.js.org/config/theming.html#available-themes
+    themes = ["default", "dark"]
+
+  # 修复 0.3.13 |全新 Admonitions 自定义配置
+  # 查看 https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions
+  # syntax: <type> = <icon>
+  [params.admonition]
+    # ban = "fa-solid fa-ban"
+  
+  # 修复 0.3.14 |新增 任务列表自定义配置
+  # 查看 https://fixit.lruihao.cn/documentation/content-management/advanced/#custom-task-lists
+  # 语法： <sign> = <icon>
+  [params.taskList]
+    # tip = "fa-regular fa-lightbulb"
+
+  # 修复 0.3.15 |NEW version 简码配置
+  [params.repoVersion]
+    # release 标签的 url 前缀
+    url = "https://github.com/hugo-fixit/FixIt/releases/tag/v"
+    # 项目名称
+    name = "FixIt"
+
+  # 修复 0.2.12 |新的 PanguJS 配置
+  [params.pangu]
+    # 用于中文书写
+    enable = false
+    selector = "article" # 修复 0.2.17 |新增功能
+
+  # 修复 0.2.12 |全新 水印配置
+  # 详细配置 参见 https://github.com/Lruihao/watermark#readme
+  [params.watermark]
+    enable = false
+    # 水印的文字（支持 HTML 格式）
+    content = ""
+    # 水印的透明度
+    opacity = 0.1
+    # 水印的宽度。单位：px
+    width = 150
+    # 水印的高度。单位：px
+    height = 20
+    # 水印的行距。单位：px
+    rowSpacing = 60
+    # 水印的列间距。单位：px
+    colSpacing = 30
+    # 水印的切线角度。单位：DEG
+    rotate = 15
+    # 水印的 fontSize 的 fontSize 的单位：REM
+    fontSize = 0.85
+    # 修复 0.2.13 |NEW 水印的 fontFamily
+    fontFamily = "inherit"
+
+  # 修复 0.3.10 |新 Busuanzi 计数
+  [params.busuanzi]
+    # 是否启用 Busuanzi 计数
+    enable = false
+    # busuanzi count 核心脚本源。默认值为 https://vercount.one/js
+    source = "https://vercount.one/js"
+    # 是否显示网站视图
+    siteViews = true
+    # 是否显示页面浏览量
+    pageViews = true
+
+  # Google/Bing/Yandex/Pinterest/百度/360/搜狗的站内验证码配置
+  [params.verification]
+    google = ""
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
+    so = ""
+    sogou = ""
+
+  # 站点 SEO 配置
+  [params.seo]
+    # 图片 URL
+    image = "/favicon-96x96.png"
+    # 缩略图 URL
+    thumbnailUrl = "/favicon-96x96.png"
+
+  # Analytics 配置
+  [params.analytics]
+    enable = false
+    # 谷歌分析
+    [params.analytics.google]
+      id = ""
+      # 是否匿名化 IP
+      anonymizeIP = true
+    # Fathom 分析
+    [params.analytics.fathom]
+      id = ""
+      # 跟踪链接的服务器 URL（如果您是自托管）
+      server = ""
+    # 修复 0.3.16 |新 百度分析
+    [params.analytics.baidu]
+      id = ""
+    # 修复 0.3.16 |新 鲜味分析
+    [params.analytics.umami]
+      data_website_id = ""
+      src = ""
+      data_host_url = ""
+      data_domains = ""
+    # 修复 0.3.16 |全新 Plausible Analytics
+    [params.analytics.plausible]
+      data_domain = ""
+      src = ""
+    # 修复 0.3.16 |全新 Cloudflare 分析
+    [params.analytics.cloudflare]
+      token = ""
+    # 修复 0.3.16 |新 Splitbee 分析
+    [params.analytics.splitbee]
+      enable = false
+      # 无 cookie 模式
+      no_cookie = true
+      # 遵循浏览器的 Do Not Track 设置
+      do_not_track = true
+      # token（可选），更多信息 https://splitbee.io/docs/embed-the-script
+      data_token = ""
+
+  # Cookie 同意配置
+  [params.cookieconsent]
+    enable = false
+    # 用于 Cookie 同意横幅的文本字符串
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
+  # 第三方库文件的 CDN 配置
+  [params.cdn]
+    # CDN 数据文件名，默认禁用 [“jsdelivr.yml”， “unpkg.yml”， ...]
+    # 位于“themes/FixIt/assets/data/cdn/”目录下
+    # 你可以将自己的数据文件存储在项目下的同一路径中：“assets/data/cdn/”
+    data = ""
+
+  # 兼容性配置
+  [params.compatibility]
+    # 是否在 CDNJS 上使用 Polyfill.io 以兼容较旧的浏览器
+    # https://cdnjs.cloudflare.com/polyfill
+    polyfill = false
+    # 是否使用 object-fit-images 来兼容较旧的浏览器
+    objectFit = false
+
+  # 修复 0.2.14 |右上角或左上角的新 GitHub 横幅
+  [params.githubCorner]
+    enable = false
+    permalink = "https://github.com/hugo-fixit/FixIt"
+    title = "View source on GitHub"
+    position = "right" # ["left", "right"]
+
+  # 修复 0.2.14 |新的 Gravatar 配置
+  [params.gravatar]
+    # 修复 0.2.18 |NEW 根据作者的邮箱，如果作者的邮箱没有设置，会使用本地头像
+    enable = false
+    # Gravatar host，默认： “www.gravatar.com”
+    host = "www.gravatar.com" # ["cravatar.cn", "gravatar.loli.net", ...]
+    style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
+
+  # 修复 0.2.16 |新 返回顶部
+  [params.backToTop]
+    enable = true
+    # 在 b2t 按钮中滚动百分比标签
+    scrollpercent = true
+
+  # 修复 0.2.16 |全新 阅读进度条
+  [params.readingProgress]
+    enable = false
+    # 可用值： [“left”， “right”]
+    start = "left"
+    # 可用值： [“top”， “bottom”]
+    position = "top"
+    reversed = false
+    light = ""
+    dark = ""
+    height = "2px"
+  
+  # 修复 0.2.17 |新增 页面加载期间，进度条位于顶部。
+  # 更多信息：https://github.com/CodeByZach/pace
+  [params.pace]
+    enable = false
+    # 所有可用颜色：
+    # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
+    color = "blue"
+    # 所有可用的主题：
+    # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
+    # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
+    theme = "minimal"
+  
+  # 修复 0.3.17 |新的 PostChat AI 配置
+  # 根据您的帖子构建知识库，支持 AI 汇总、AI 搜索和 AI Chatbot。
+  # 从我的邀请链接获取 PostChat Key，感谢您的支持！
+  # https://ai.zhheo.com/console/login?InviteID=85041330
+  [params.postChat]
+    enable = false
+    key = ""
+    # 用户如何发起聊天： [“iframe”， “magic”]
+    userMode = "iframe"
+    addButton = true
+    defaultInput = false
+    left = ""
+    bottom = ""
+    width = ""
+    height = ""
+    fill = ""
+    backgroundColor = ""
+    upLoadWeb = true
+    showInviteLink = true
+    userTitle = ""
+    userDesc = ""
+    # 要涂黑的 DOM 容器，例如 [“.aplayer”]
+    blackDom = []
+    # 仅适用于 iframe 模式
+    frameWidth = ""     # e.g. "375px"
+    frameHeight = ""    # e.g. "600px"
+    # 仅适用于魔术模式
+    userIcon = ""
+    defaultChatQuestions = []
+    defaultSearchQuestions = []
+    # 修复 0.4.0 |新增功能
+    hotWords = true
+
+  # 修复 0.3.17 |全新 摘要 AI 配置
+  # 查看 https://ai.zhheo.com/docs/summary.html
+  [params.postSummary]
+    enable = false
+    # 如果你设置了 'params.postChat.key'，你不需要设置 'params.postSummary.key'
+    key = ""
+    title = ""
+    # 主题选项： [“”， “simple”， “yanzhi”]
+    theme = ""
+    postURL = ""
+    blacklist = ""
+    wordLimit = 1000
+    typingAnimate = true
+    beginningText = ""
+    loadingText = true
+
+  # 修复 0.3.10 |用于 RSS、Atom 和 JSON 源的新全局源配置。
+  [params.feed]
+    # 要包含在源中的帖子数。如果设置为 -1，则所有帖子。
+    limit = 10
+    # 是否在 Feed 中显示全文内容。
+    fullText = true
+    # 关注站点挑战：https://follow.is/
+    [params.feed.follow]
+      feedId = ""
+      userId = ""
+  
+  # 修复 0.3.17 |全新 镜像配置
+  [params.image]
+    # 缓存远程图像以获得更好的优化
+    cacheRemote = false
+    # 图像大小调整和优化
+    optimise = false
+
+  # 修复 0.3.12 |全新 自定义部件配置
+  # 自定义 partials 必须存储在 /layouts/partials/ 目录中。
+  # 依赖于打开的自定义区块 https://fixit.lruihao.cn/references/blocks/
+  [params.customPartials]
+    head = []
+    menuDesktop = []
+    menuMobile = []
+    profile = []
+    aside = []
+    comment = []
+    footer = []
+    widgets = []
+    assets = []
+    postTocBefore = []
+    postTocAfter = []
+    postContentBefore = []
+    postContentAfter = []
+    postFooterBefore = []
+    postFooterAfter = []
+
+  # 修复 0.2.15 |新的开发人员选项
+  # 选择名为 'public_repo' 的范围以生成个人访问令牌，
+  # 使用环境变量 'HUGO_PARAMS_GHTOKEN=xxx' 进行配置，详 https://gohugo.io/functions/os/getenv/#examples
+  [params.dev]
+    enable = false
+    # 检查更新
+    c4u = false
+
+  # 页面配置
+  [params.page]
+    # 修复 0.2.18 |NEW 是否启用文章作者的头像
+    authorAvatar = true
+    # 是否在首页中隐藏页面
+    hiddenFromHomePage = false
+    # 是否在搜索结果中隐藏页面
+    hiddenFromSearch = false
+    # 修复 0.3.0 |NEW 是否在相关文章中隐藏页面
+    hiddenFromRelated = false
+    # 修复 0.3.10 |新增是否在 RSS、Atom 和 JSON 源中隐藏页面
+    hiddenFromFeed = false
+    # 是否启用 twemoji
+    twemoji = false
+    # FixIt 0.2.18 | CHANGED whether to enable lightgallery
+    # 设置为 true，如果图片有标题，则内容中的图片将显示为 gallery，例如 ![alt](src "title")
+    # 设置为“false” ，无论图片是否有标题，内容中的图片都会被强制显示为图库，例如![alt](src)
+    lightgallery = false
+    # 是否启用 Ruby 扩展语法
+    ruby = true
+    # 是否启用 fraction 扩展语法
+    fraction = true
+    # 是否启用 fontawesome 扩展语法
+    fontawesome = true
+    # 许可证信息（支持 HTML 格式）
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
+    # 是否显示文章的 Raw Markdown 内容链接
+    linkToMarkdown = false
+    # 修复 0.3.0 |NEW 是否显示链接以查看文章的源代码
+    linkToSource = false
+    # 修复 0.3.0 |NEW 是否显示编辑文章的链接
+    linkToEdit = false
+    # 修复 0.3.0 |新 是否显示帖子的报告问题链接
+    linkToReport = false
+    # 修复 0.3.20 |新增是否在 VSCode 中显示查看文章的链接
+    linkToVscode = false
+    # 修复 0.3.10 |更改了页面样式 [“narrow”， “normal”， “wide”， ...]
+    pageStyle = "normal"
+    # 修复 0.2.17 |CHANGED 自动书签支持
+    # 如果为 true，则在关闭页面时保存阅读进度。
+    autoBookmark = false
+    # 修复 0.2.17 |新增是否开启 wordCount
+    wordCount = true
+    # 修复 0.2.17 |新增是否开启 readingTime
+    readingTime = true
+    # 修复 0.2.17 |新的 End of post 标志
+    endFlag = ""
+    # 修复 0.2.18 |NEW 是否开启 instant.page
+    instantPage = false
+    # 修复 0.3.0 |新增 侧边栏是否开启收藏列表
+    collectionList = false
+    # 修复 0.3.0 |NEW 是否在文章末尾启用集合导航
+    collectionNavigation = true
+
+    # 修复 0.2.15 |新的 Repost 配置
+    [params.page.repost]
+      enable = false
+      url = ""
+    # 目录配置
+    [params.page.toc]
+      # 是否开启目录
+      enable = true
+      # 是否将静态目录保留在帖子前面
+      keepStatic = false
+      # 是否使侧边栏的目录自动折叠
+      auto = true
+      # 修复 0.2.13 |目录的新位置 [“left”， “right”]
+      position = "right"
+      # 修复 0.3.12 |NEW 取代 'markup.tableOfContents' 设置
+      ordered = false
+      startLevel = 2
+      endLevel = 6
+    # 修复 0.2.13 |新增功能 在文章的开头显示一条消息，警告读者其内容可能已过期
+    [params.page.expirationReminder]
+      enable = true
+      # 如果最后修改时间超过 90 天，则显示提醒
+      reminder = 60
+      # 如果最后修改时间超过 180 天，则显示警告
+      warning = 90
+      # 如果文章过期，请关闭评论与否
+      closeComment = false
+    # 修复 0.3.0 |新页面标题配置
+    [params.page.heading]
+      # 修复 0.3.3 |NEW 是否将标题的自动文本大写
+      capitalize = false
+      # 修复 0.3.12 |CHANGED 必须将 'params.page.toc.ordered' 设置为 true
+      [params.page.heading.number]
+        # 是否启用自动标题编号
+        enable = false
+        # 修复 0.3.3 |NEW 仅在主部分页面中启用（默认为 posts）
+        onlyMainSection = true
+        [params.page.heading.number.format]
+          h1 = "{title}"
+          h2 = "{h2} {title}"
+          h3 = "{h2}.{h3} {title}"
+          h4 = "{h2}.{h3}.{h4} {title}"
+          h5 = "{h2}.{h3}.{h4}.{h5} {title}"
+          h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
+    # 修复 0.2.16 |更改了 KaTeX 数学公式（https://katex.org）
+    [params.page.math]
+      enable = true
+      # 默认的内联分隔符是 $ ... $ 和 \（ ... \）
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # 默认块分隔符是 $$ ... $$， \[ ... \]， \begin{equation} ... \end{equation} 和其他一些函数
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # KaTeX 扩展 copy_tex
+      copyTex = true
+      # KaTeX 扩展 mhchem
+      mhchem = true
+    # 代码包装器配置
+    [params.page.code]
+      # 修复 0.3.9 |NEW 是否启用代码包装器
+      enable = true
+      # 是否显示代码包装器的 copy 按钮
+      copy = true
+      # 修复 0.2.13 |NEW 是否显示代码包装器的编辑按钮
+      edit = false
+      # 默认显示代码的最大行数
+      maxShownLines = 15
+    # Mapbox GL JS 配置（https://docs.mapbox.com/mapbox-gl-js）
+    [params.page.mapbox]
+      # Mapbox GL JS 的访问令牌
+      accessToken = ""
+      # 浅色主题的样式
+      lightStyle = "mapbox://styles/mapbox/light-v11"
+      # 深色主题的样式
+      darkStyle = "mapbox://styles/mapbox/dark-v11"
+      # 是否添加 NavigationControl
+      navigation = true
+      # 是否添加 GeolocateControl
+      geolocate = true
+      # 是否添加 ScaleControl
+      scale = true
+      # 是否添加 FullscreenControl
+      fullscreen = true
+    # 修复 0.3.0 |新增 相关内容配置（https://gohugo.io/content-management/related/）
+    [params.page.related]
+      enable = false
+      count = 5
+      # 修复 0.3.20 |相关内容的新位置，可选值：[“aside”， “footer”]
+      position = ["aside", "footer"]
+    # 修复 0.2.17 |全新 捐赠（赞助者）设置
+    [params.page.reward]
+      enable = false
+      animation = false
+      # 相对于帖子页脚的位置，可选值： [“before”， “after”]
+      position = "after"
+      # comment = “请给我买杯咖啡”
+      # 修复 0.2.18 |新增二维码图片显示模式，可选值：[“static”， “fixed”]，默认：'static'
+      mode = "static"
+      [params.page.reward.ways]
+        # wechatpay = "/images/wechatpay.png"
+        # alipay = "/images/alipay.png"
+        # paypal = "/images/paypal.png"
+        # bitcoin = "/images/bitcoin.png"
+    # 帖子页面中的社交分享链接
+    [params.page.share]
+      enable = false
+      Twitter = true
+      Facebook = true
+      Linkedin = false
+      Whatsapp = false
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = false
+      Instapaper = false
+      Pocket = false
+      Flipboard = false
+      Weibo = true
+      Myspace = false
+      Blogger = false
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = false
+      Skype = false
+      Trello = false
+      Mix = false
+    # 修复 0.2.15 |CHANGED 注释配置
+    [params.page.comment]
+      enable = false
+      # 修复 0.2.13 |新增 Artalk 评论配置（https://artalk.js.org/）
+      [params.page.comment.artalk]
+        enable = false
+        server = "https://yourdomain"
+        site = "默认站点"
+        # 修复 0.3.3 |NEW 是否使用后端配置
+        useBackendConf = false
+        placeholder = ""
+        noComment = ""
+        sendBtn = ""
+        editorTravel = true
+        flatMode = "auto"
+        # 修复 0.2.17 |CHANGED 启用 Lightgallery 支持
+        lightgallery = false
+        locale = "" # FixIt 0.2.15 | NEW
+        # 修复 0.2.18 |新增功能
+        emoticons = ""
+        nestMax = 2
+        nestSort = "DATE_ASC" # ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
+        vote = true
+        voteDown = false
+        uaBadge = true
+        listSort = true
+        imgUpload = true
+        preview = true
+        versionCheck = true
+      # Disqus 评论配置（https://disqus.com）
+      [params.page.comment.disqus]
+        enable = false
+        # Disqus 短名称在帖子中使用 Disqus
+        shortname = ""
+      # Gitalk 评论配置（https://github.com/gitalk/gitalk）
+      [params.page.comment.gitalk]
+        enable = false
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      # Valine 注释配置（https://github.com/xCss/Valine）
+      [params.page.comment.valine]
+        enable = false
+        appId = ""
+        appKey = ""
+        placeholder = ""
+        avatar = "mp"
+        meta = ['nick','mail','link']
+        requiredFields = []
+        pageSize = 10
+        lang = ""
+        visitor = true
+        recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
+        # 表情数据文件名，默认为“google.yml”
+        # [“apple.yml”， “google.yml”， “facebook.yml”， “twitter.yml”]
+        # 位于“themes/FixIt/assets/lib/valine/emoji/”目录下
+        # 你可以将自己的数据文件存储在 project 下的同一路径中：
+        # “assets/lib/valine/emoji/”
+        emoji = ""
+        commentCount = true # 修复 0.2.13 |新增功能
+      # 修复 0.2.16 |更改 Waline 注释配置（https://waline.js.org）
+      [params.page.comment.waline]
+        enable = false
+        serverURL = ""
+        pageview = false # 修复 0.2.15 |新增功能
+        emoji = ["//unpkg.com/@waline/emojis@1.1.0/weibo"]
+        meta = ["nick", "mail", "link"]
+        requiredMeta = []
+        login = "enable"
+        wordLimit = 0
+        pageSize = 10
+        imageUploader = false # 修复 0.2.15 |新增功能
+        highlighter = false # 修复 0.2.15 |新增功能
+        comment = false # 修复 0.2.15 |新增功能
+        texRenderer = false # 修复 0.2.16 |新增功能
+        search = false # 修复 0.2.16 |新增功能
+        recaptchaV3Key = "" # 修复 0.2.16 |新增功能
+        turnstileKey = "" # 修复 0.3.8 |新增功能
+        reaction = false # 修复 0.2.18 |新增功能
+      # Facebook 评论配置（https://developers.facebook.com/docs/plugins/comments）
+      [params.page.comment.facebook]
+        enable = false
+        width = "100%"
+        numPosts = 10
+        appId = ""
+        languageCode = ""
+      # Telegram 评论配置（https://comments.app）
+      [params.page.comment.telegram]
+        enable = false
+        siteID = ""
+        limit = 5
+        height = ""
+        color = ""
+        colorful = true
+        dislikes = false
+        outlined = false
+      # commento 评论配置（https://commento.io）
+      [params.page.comment.commento]
+        enable = false
+      # utteranc 评论配置（https://utteranc.es）
+      [params.page.comment.utterances]
+        enable = false
+        # 所有者/存储库
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
+      # 修复 0.2.13 |新增 Twikoo 评论配置（https://twikoo.js.org/）
+      [params.page.comment.twikoo]
+        enable = false
+        envId = ""
+        region = ""
+        path = ""
+        visitor = true
+        commentCount = true
+        # 修复 0.2.17 |CHANGED 启用 Lightgallery 支持
+        lightgallery = false
+        # 修复 0.2.17 |全新 启用 Katex 支持
+        katex = false
+      # 修复 0.2.14 |新的 Giscus 评论配置
+      [params.page.comment.giscus]
+        enable = false
+        repo = ""
+        repoId = ""
+        category = ""
+        categoryId = ""
+        mapping = ""
+        origin = "https://giscus.app" # FixIt 新 |0.3.7 或者将其设置为您的自托管域
+        strict = "0" # FixIt 新 |0.2.18
+        term = ""
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom" # ["top", "bottom"]
+        lang = ""
+        lightTheme = "light"
+        darkTheme = "dark"
+        lazyLoad = true
+    # 第三方库配置
+    [params.page.library]
+      [params.page.library.css]
+        # someCSS = "some.css"
+        # located in "assets/"
+        # Or
+        # someCSS = "https://cdn.example.com/some.css"
+      [params.page.library.js]
+        # someJavascript = "some.js"
+        # located in "assets/"
+        # Or
+        # someJavascript = "https://cdn.example.com/some.js"
+    # 页面 SEO 配置
+    [params.page.seo]
+      # 图片 URL
+      images = []
+      # 发布者信息
+      [params.page.seo.publisher]
+        name = ""
+        logoUrl = ""

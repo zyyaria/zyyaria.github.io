@@ -1,0 +1,14 @@
+baseURL = 'https://zyyaria.github.io/'
+languageCode = 'en-us'
+title = ''
+theme = 'FixIt'
+defaultContentLanguage = 'zh-cn'
+ignoreLogs = ['warning-dev-version']
+ignoreFiles = ['README\.md$']
+# 以下配置表示继承 FixIt 主题的 markup，outputs 和 taxonomies 配置
+[markup]
+  _merge = "shallow"
+[outputs]
+  _merge = "shallow"
+[taxonomies]
+  _merge = "shallow"
