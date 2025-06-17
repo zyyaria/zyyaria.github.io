@@ -587,7 +587,7 @@ mainSections = []
       # 首页显示标题（支持 HTML 格式）
       title = "Aria"
       # 首页显示字幕（支持 HTML 格式）
-      subtitle = "假如再碰不见你们，祝你们早安、午安、晚安。"
+      subtitle = "温故而知新，可以为师矣。"
       # 字幕是否使用 Typeit 动画
       typeit = true
       # 是否显示社交链接

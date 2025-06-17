@@ -1,6 +1,6 @@
 ---
 title: "微软 Win11 官方重装教程"
-description: "两阶段纯净安装：1.微软 Media Creation Tool 重装系统 2.HP Support Assistant 自动安装驱动"
+description: "惠普笔记本纯净安装：1.微软 Media Creation Tool 重装系统 2.HP Support Assistant 自动安装驱动"
 date: 2025-06-16T18:07:37+08:00
 lastmod: 2025-06-16T18:07:37+08:00
 categories: ["程序"]
@@ -9,9 +9,7 @@ collections: ["系统重装"]
 
 <!--more-->
 
-本教程采用微软 Media Creation Tool 重装系统 + HP Support Assistant 自动安装驱动方式，其优势在于系统纯净无推广软件，且激活信息自动关联微软账户，且避免 PE 捆绑工具或恢复分区中的冗余驱动干扰硬件性能。
-
-另外，惠普官方提供[HP Cloud Recovery Tool](https://support.hp.com/cn-zh/document/ish_4511134-4630612-16)重装，但由于该方式需要 32GB 及以上的 U 盘制作启动盘，但我只有一个 16GB 的 u 盘，未尝试过该方式，有需求的可以阅读惠普官方提供的文档。
+Media Creation Tool + HP Support Assistant 重装系统的优势在于系统纯净无推广软件，且激活信息自动关联微软账户，且避免 PE 捆绑工具或恢复分区中的冗余驱动干扰硬件性能。
 
 ## 1. 准备工作
 
@@ -40,19 +38,17 @@ collections: ["系统重装"]
 
 驱动一定要下载至备份盘，切记不要放到启动盘内，会被格式化！！！
 
-首先下载[HP Support Assistant](https://support.hp.com/cn-zh/help/hp-support-assistant?jumpid=va_r602_cn/zh/any/psg/pl_ot_ob_ds_pd/hpsupportassistant_cc/dt)至备份盘，它是专为惠普用户设计的智能管理工具，集成了系统诊断、驱动自动更新、性能优化等功能。
-
-由于系统重装后没有驱动不能连接宽带和 WiFi，所以你需要下载网卡驱动（有线 or 无线）至备份盘，或者直接使用 USB 网络共享连接电脑和手机（无需下载网卡）。
+系统重装后电脑没有任何驱动，而[HP Support Assistant](https://support.hp.com/cn-zh/help/hp-support-assistant?jumpid=va_r602_cn/zh/any/psg/pl_ot_ob_ds_pd/hpsupportassistant_cc/dt)支持驱动自动更新安装，但它需要联网使用，所以你需要下载该软件及网卡驱动至备份盘，或者直接使用 USB 网络共享连接电脑和手机（无需下载网卡）。
 
 网卡驱动下载步骤：
 
-① 快捷键`win+i`打开系统设置，选择系统，拉至最后查看系统信息，获取电脑的型号和系统版本及版本号。
+① `win+i`打开系统设置，选择系统，拉至最后查看系统信息，获取电脑的型号和系统版本及版本号。
 
-② 打开[惠普软件和驱动程序](https://support.hp.com/cn-zh/drivers/laptops)页面，根据提示输入电脑型号和选定系统版本，惠普会自动列出适合你电脑的驱动程序。
+② 打开[HP 软件和驱动程序](https://support.hp.com/cn-zh/drivers/laptops)页面，输入电脑型号和选定系统版本，将会列出适合你电脑的驱动程序。
 
 ![惠普软件和驱动程序](pic1-1.png)
 
-③ 找到并下载网卡驱动（Realtek 有线网卡驱动 or 英特尔无线网卡驱动）。
+③ 找到并下载网卡驱动（Realtek 有线网卡驱动 or 英特尔无线网卡驱动）至备份盘。
 
 ## 2. 制作启动盘
 
@@ -62,7 +58,7 @@ U 盘右键选择“格式化”，文件系统选择`FAT32`，勾选“快速�
 
 ### 2.2 下载工具
 
-前往[微软官方 Windows11 下载页面](https://www.microsoft.com/zh-cn/software-download/windows11)，下载**Media Creation Tool**。
+[Media Creation Tool](https://www.microsoft.com/zh-cn/software-download/windows11)是由微软开发的一款可以帮助用户更新系统、安装系统和下载系统镜像文件的软件。
 
 ![Media Creation Tool](pic2-1.png)
 
@@ -78,7 +74,7 @@ U 盘保持插入，关机后再开机，开机时连续按`F9`键，选择“US
 
 ### 3.2 分区处理
 
-进入安装界面，按快捷键`Shift+F10`打开命令提示符，依次输入命令：
+进入安装界面，按`Shift+F10`打开命令提示符，依次输入命令：
 
 ```cmd
 diskpart
@@ -94,7 +90,7 @@ exit
 
 ### 3.3 跳过联网激活
 
-进入 OOBE 界面（“让我们为你连接网络”）后，按快捷键`Shift+F10`输入命令：
+进入 OOBE 界面（“让我们为你连接网络”）后，按`Shift+F10`输入命令：
 
 ```cmd
 OOBE\BYPASSNRO
@@ -121,7 +117,7 @@ OOBE\BYPASSNRO
 
 ![更新驱动](pic4-1.png)
 
-驱动安装完成后，快捷键`win+i`进入设置，选择“Windows 更新”，对系统进行一次更新。
+驱动安装完成后，`win+i`进入设置，选择“Windows 更新”，对系统进行一次更新。
 
 直至驱动安装和系统更新都完成后，你就可以安装软件了。系统重装后只存在一个 C 盘，如果有分区要求，建议在安装软件前操作。
 
@@ -129,7 +125,7 @@ OOBE\BYPASSNRO
 
 以下是操作步骤：
 
-① 快捷键`Win+X`，选择“磁盘管理”，或者快捷键`Win+R`输入`diskmgmt.msc`，打开磁盘管理。
+① `win+x`选择“磁盘管理”，或者`win+r`输入`diskmgmt.msc`，打开磁盘管理。
 
 ② 右键点击 C 盘，选择“压缩卷”，输入要分出的空间大小（1024MB=1GB），点击“压缩”，建议至少保留 C 盘 100GB 以上的空间。
 

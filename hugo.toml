@@ -4,7 +4,6 @@ title = ''
 theme = 'FixIt'
 defaultContentLanguage = 'zh-cn'
 ignoreLogs = ['warning-dev-version']
-ignoreFiles = ['README\.md$']
 # 以下配置表示继承 FixIt 主题的 markup，outputs 和 taxonomies 配置
 [markup]
   _merge = "shallow"
