@@ -237,7 +237,7 @@ Hugo + FixIt 博客
 
 GitHub Actions 是 GitHub 推出的持续集成工具，旨在为开发人员提供一种围绕持续集成自动化其工作流程的方法，帮助开发人员完成构建、部署、安排重复性任务等。通过设置工作流，只需要将代码推送到 GitHub 仓库，而无需在本地执行 Hugo 生成静态文件的命令（`hugo`），GitHub Actions 会自动完成。
 
-![pic10](pic6-4.png)
+![工作流程](pic5-1.png)
 
 ### 5.1 创建 GitHub 仓库
 
@@ -245,7 +245,7 @@ GitHub Actions 是 GitHub 推出的持续集成工具，旨在为开发人员提
 
 GitHub 默认提供`.github.io`域名给用户使用，且具有唯一性，也就是说“Repository name”填写`<用户名>.github.io`，将会生成<http://owner.github.io>网址，其它则会生成<http:/owner.github.io/name>网址。
 
-![新建仓库](pic6-2.png)
+![新建仓库](pic5-2.png)
 
 点击“Create Repository”创建新仓库，之后打开主题配置文件，修改以下内容。同时，修改站点配置文件的`baseURL`参数。
 
@@ -258,7 +258,7 @@ enableGitInfo = true
 
 点击仓库的“Settings->Pages->Build and deployment”，将“Source”修改为“GitHub Actions”。
 
-![GitHub Actions](pic6-5.png)
+![GitHub Actions](pic5-3.png)
 
 ### 5.2 配置密钥
 
@@ -279,7 +279,7 @@ cat ~/.ssh/id_ed25519.pub
 
 ② 添加密钥：复制密钥内容，回到 Github，点击头像，选择“Settings->SSH and GPG keys->New SSH key”，粘贴到`Key`位置，标题随意，填写后点击“Add SSH Key”。
 
-![SSH 密钥](pic5-3.png)
+![SSH 密钥](pic5-4.png)
 
 ③ 验证连接：Git Bash 终端输入以下命令，出现“Hi，username！You've successfully authenticated……”，则表示成功。
 
@@ -419,19 +419,21 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin git@github.com:username/username.github.io.git
 git push -u origin main
-
-git add -A
-git commit -m "first commit"
-git branch -M main
-git remote add origin git@github.com:zyyaria/zyyaria.github.io.git
-git push -u origin main
 ```
 
 打开 GitHub 仓库，选择“Actions”，你将看到“All workflows”，当 GitHub 完成构建和部署网站后，状态指示器的颜色将变成绿色。
 
+![workflows](pic5-5.png)
+
 点击“Settings->Pages->GitHub Pages->Visit site”访问网页，如果没有看到有网址，就在下面的“Branch”选择`main`，然后保存，稍等片刻后刷新就会出现。
 
-未来，每当你从本地仓库推送更改时，GitHub 将自动重构你的网站并部署这些更改。
+之后每当你从本地仓库推送更改时，只要在Git Bash终端输入以下命令，GitHub Actions将自动重构你的网站并部署这些更改，自行替换引号内的内容，这表明你本次提交了什么更改。
+
+```bash
+git add -A
+git commit -m "修改v1.0"
+git push
+```
 
 ## 参考内容
 
