@@ -430,6 +430,8 @@ git commit -m "修改v1.0"
 git push
 ```
 
+VSCode 具有源代码管理功能。初次命令行推送后，再次提交时`Ctrl+Shift+G`调出源代码管理窗口，
+
 ## 参考内容
 
 1. [Hugo Quick start](https://gohugo.io/getting-started/quick-start/)
