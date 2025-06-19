@@ -1,6 +1,6 @@
 ---
 title: "Hugo+FixIt 自动化部署"
-description: "基于 Windows 系统：1. Hugo 环境部署 2. FixIt 主题配置 3. GitHub Actions 自动部署"
+description: "零基础构建个人博客：1. Hugo 环境部署 2. FixIt 主题配置 3. GitHub Actions 自动部署"
 date: 2025-06-16T16:09:43+08:00
 lastmod: 2025-06-16T16:09:43+08:00
 categories: ["程序"]
@@ -9,25 +9,29 @@ collections: ["Hugo 博客"]
 
 <!--more-->
 
-以下教程适用于 Windows11 64bit 操作系统，并使用 Hugo-Fixit 主题进行说明。
+本指南适用于 Windows11 系统操作系统，采用 Hugo + FixIt 主题静态博客建站方式，通过 GitHub Actions 实现「写作即发布」的自动化工作流。
 
-## 1. 安装软件
+## 1. 安装必备软件
 
 ### 1.1 Hugo（博客引擎）
 
-[Hugo](https://gohugo.io/) 是一个用 Go 语言 编写的静态网站生成器，可以快速地生成高效、安全和易于管理的静态网站，具有速度快、可定制性强、易于使用等特点。
+[Hugo](https://gohugo.io/) 是用 Go 语言编写的静态网站生成器，能以毫秒级速度将 Markdown 转换为 HTML 页面，是构建博客的核心工具。
 
-下载[Hugo 扩展版本](https://github.com/gohugoio/hugo/releases)（≥ v0.146.0），如`Hugo_extended_0.147.8_windows-arm64.zip`，解压至 `D:\Hugo`，并将解压后的文件夹重命名为 `bin`。
+① **下载扩展版**
 
-设置环境变量的步骤如下（关键！）：
+打开 [Hugo Releases](https://github.com/gohugoio/hugo/releases) 下载标有 `extended` 且匹配操作系统的 `zip` 文件，要求版本 ≥ v0.146.0，如 `Hugo_extended_0.147.8_windows-arm64.zip`。
 
-① `win+s`搜索“环境变量”，选择“编辑系统环境变量”。
+② **解压与重命名**
 
-② 点击“环境变量”，在“系统变量”中找到`Path`，点击“编辑”->“新建”。
+将下载的 `zip` 文件解压至 `D:\Hugo` 目录，并将解压后的文件夹重命名为 `bin`，最终路径应为 `D:\Hugo\bin`。
 
-③ 输入`D:\Hugo\bin`，确认保存。
+③ **设置环境变量**（❗❗）
 
-④ 验证安装：`win+r`输入`cmd`回车，输入以下命令出现版本号即安装成功。
+按 `Win+S` 搜索 “环境变量”，打开 “编辑系统环境变量”，在 “系统属性” 窗口点击 “环境变量”，在 “系统变量” 区域找到 `Path`，点击 “编辑” → “新建”，输入 `D:\Hugo\bin`，逐层点击 “确定” 保存。
+
+④ **验证安装**
+
+按 `Win+R` 输入 `cmd` ，打开命令提示符，输入以下命令出现版本号即安装成功。
 
 ```cmd
 hugo version
@@ -35,9 +39,15 @@ hugo version
 
 ### 1.2 Git（代码管理）
 
-[Git](https://git-scm.com/) 是一个开源的分布式版本控制系统，用于跟踪代码变更、管理代码历史、并支持多人协作开发。
+[Git](https://git-scm.com/) 是分布式版本控制系统，用于追踪博客源码变更历史。
 
-下载并安装[Git](https://git-scm.com/downloads)，安装时所有选项保持默认，完成后在桌面右键能看到“Git Bash here”选项。`win+r`输入`cmd`回车，输入以下命令出现版本号即安装成功。
+① **下载安装**
+
+下载并安装 [Git](https://git-scm.com/downloads)，安装时所有选项保持默认。
+
+② **验证安装**
+
+右键点击任意文件夹或文件，检查菜单是否出现 “Git Bash here” 选项，并按 `Win+R` 输入 `cmd` ，打开命令符，输入以下命令出现版本号即安装成功。
 
 ```cmd
 git version
@@ -45,21 +55,33 @@ git version
 
 ### 1.3 VSCode（编辑器）
 
-[‌Visual Studio Code](https://code.visualstudio.com/)（简称 VS Code）‌ 是由微软开发的一款免费、开源的跨平台代码编辑器，支持语法高亮、代码自动补全、代码重构、查看定义功能，并且内置了命令行工具和 Git 版本控制系统。
+[‌Visual Studio Code](https://code.visualstudio.com/)（简称 VS Code）‌ 提供 Markdown 编辑、实时预览和 Git 集成功能，是管理博客源码的高效编辑器。
 
-下载并安装[Visual Studio Code](https://code.visualstudio.com/Download)，安装时勾选所有附加任务，其他选项保持默认，完成后在桌面右键能看到“通过 code 打开”选项。
+① **下载安装**
 
-![VSCode](pic1-1.png)
+下载并安装 [VS Code](https://code.visualstudio.com/Download)，安装时在 “选择附加任务” 页面勾选所有复选框（特别是 “添加到 PATH”），其他选项保持默认。
 
-首次打开后，`ctrl+shift+x`调出扩展界面，搜索“Chinese”，安装“Chinese (Simplified) Language Pack”，右下角提示重启时点击“Restart Now”，重启后即可使用中文界面。
+② **验证安装**
 
-## 2. 创建站点
+右键点击任意文件夹或文件，检查菜单是否出现 “通过 code 打开” 选项。
 
-打开 `D:\Hugo`文件夹，空白处右键选择“通过 code 打开”，打开顶部菜单栏的“终端”，选择“新建终端”，在底部面板点击“+”选择“Git Bash”。
+③ **设置中文界面（可选）**
+
+打开 VSCode，按 `Ctrl+Shift+X` 调出扩展界面，搜索并安装 “Chinese (Simplified) Language Pack”。安装完成后点击右下角 “Restart Now” 重启生效。
+
+## 2. 创建与配置站点
+
+### 2.1 初始化站点
+
+① **打开终端**
+
+在 `D:\Hugo` 文件夹空白处右键选择 “通过 code 打开”，在 VSCode 顶部菜单栏点击 “终端” → “新建终端”，在底部面板点击 `+` 选择 “Git Bash”。
 
 ![终端](pic2-1.png)
 
-Git Bash 终端输入以下命令：
+② **执行创建命令**
+
+在 Git Bash 终端输入以下命令将生成项目根目录( `D:\Hugo\blog`)：
 
 ```bash
 hugo new site blog
@@ -87,14 +109,17 @@ echo "theme = 'FixIt'" >> hugo.toml
 echo "defaultContentLanguage = 'zh-cn'" >> hugo.toml
 ```
 
-## 3. 配置站点
+### 2.2 配置文件设置
 
-不要修改`themes`文件夹的任何东西！！！最好在`D:\Hugo\blog`创建同名文件夹后再进行修改。
+> - 所有路径基于项目根目录：`D:\Hugo\blog` 作为基准路径。
+> - ❗ 不要直接修改 `themes/FixIt` 文件夹的任何内容！主题更新时会覆盖修改！
 
-在站点主配置（`D:\Hugo\blog\hugo.toml`）中添加以下内容：
+① **修改主配置**
+
+打开 `hugo.toml`，在末尾添加以下内容：
 
 ```toml
-ignoreLogs = ['warning-dev-version']
+ignoreLogs = ['warning-dev-version']  # 忽略开发版本警告
 # 以下配置表示继承 FixIt 主题的 markup，outputs 和 taxonomies 配置
 [markup]
   _merge = "shallow"
@@ -104,31 +129,43 @@ ignoreLogs = ['warning-dev-version']
   _merge = "shallow"
 ```
 
-创建`D:\Hugo\Blog\config\_default`文件夹，并复制粘贴`D:\Hugo\Blog\themes\FixIt\hugo.toml`文件到该文件夹，现在目录结构变成：
+② **创建主题配置**
+
+新建 `config/_default` 目录，复制 `themes/FixIt/hugo.toml` 到该文件夹。目录结构如下：
 
 ```text
 blog
 ├─ config
 │  └─ _default
-│     └─ hugo.toml      # 主题配置文件（主要修改这个）
+│     └─ hugo.toml      # ✅ 主题配置（主要修改这个）
 ├─ themes
-│  └─ FixIt            # 不要修改里面的文件！
-│     ├─ hugo.toml
-└─ hugo.toml            # 站点主配置文件（能不动就不动！）
+│  └─ FixIt             # ❌ 不要修改此目录内容
+│     ├─ hugo.toml      # 主题原始配置
+└─ hugo.toml            # 站点主配置（尽量不修改）
 ```
 
-Git Bash 终端输入以下任一命令预览网页：
+### 2.3 实时预览与调试
+
+① **启动开发服务器**
+
+在 Git Bash 终端输入以下任一命令预览网页：
 
 ```bash
 # 启动 Hugo 的开发服务器以查看站点
-hugo server
-hugo server -D                # 包括标记为draft的内容
+hugo server                         # 基础预览
+hugo server -D                      # 包括标记为draft的内容
 hugo server -D --disableFastRender  # 在更改时启用完全重新渲染
-hugo server -e production         # 支持启用评论系统和CDN等的本地预览命令
+hugo server -e production           # 生产模式（支持评论/CDN）
 # 按 Ctrl + C 停止 Hugo 的开发服务器
 ```
 
-打开 <http://localhost:1313/>即可预览网页，修改主题配置文件的同时可以实时预览网页变化。如未出现网址，可能是主题配置文件出现了语法错误，根据终端显示的错误逐一修改即可，原因是 Hugo 版本迭代后有些语法可能会被弃用，但主题创作者未及时更新，比如：
+② **访问与调试**
+
+浏览器打开 <http://localhost:1313/> ，修改 `config/_default/hugo.toml` 后页面会自动刷新。
+
+③ **常见错误修复**
+
+如果出现错误提示，查看终端提示的信息并逐一修改，有可能是 Hugo 版本迭代出现的语法兼容性错误，修正后重启服务器即可。比如：
 
 ```toml
 # 每页默认帖子数量
@@ -141,32 +178,34 @@ hugo server -e production         # 支持启用评论系统和CDN等的本地�
   # posts = "posts/:slugorfilename"
 ```
 
-修改完毕后，再次输入命令打开网址即可。
+## 3. 内容创作与管理
 
-## 4. 创建文章
+### 3.1 Front matter
 
-### 4.1 Front matter
+Front matter 是一组结构化元数据，通过标准化的字段描述文档属性，如标题、日期、分类等。详细了解请参考 [Hugo 官方文档](https://gohugo.io/content-management/front-matter/)。
 
-[Front matter](https://gohugo.io/content-management/front-matter/) 是一组结构化元数据，通过标准化的字段描述文档属性，如标题、日期、分类、标签、合集等。
+① **复制模板文件**
 
-打开`D:\Hugo\Blog\themes\FixIt\archetypes`文件夹，将`posts.md`复制并粘贴到`D:\Hugo\Blog\archetypes`。
+复制 `themes/FixIt/archetypes/posts.md` 到 `archetypes`文件夹。目录结构如下：
 
 ```text
 blog
-├─ archetypes             # 修改 Front matter
+├─ archetypes            # 存放自定义模板
 │  ├─ default.md
-│  └─ posts.md
-├─ content               # 生成和管理文章
+│  └─ posts.md           # 文章模板
+├─ content               # 文章存放目录
 │  └─ posts
 ……
-├─ themes                # 不要修改里面的文件！
+├─ themes
 │  └─ FixIt
 │     ├─ archetypes
 │     │  ├─ posts.md
 ……
 ```
 
-打开复制后的`posts.md`，按需保留所需的属性，示例如下：
+② **自定义模板内容**
+
+打开 `archetypes/posts.md`，按需保留所需的属性。示例如下：
 
 ```toml
 ---
@@ -180,71 +219,104 @@ collections: ["合集"]
 <!--more-->
 ```
 
-> 📌 **注意**：
->
-> - 不是所有的 Front matter 都必须在每篇文章中设置，只有在文章的参数和你的主题配置中的`page`部分不一致时才有必要这么做。
-> - 摘要生成优先顺序：
->   - 有分隔符`<!--more-->`，且前面没有内容，变量`description`作为摘要。
->   - 有分隔符`<!--more-->`，且前面有内容，则这部分内容作为摘要。
->   - Front matter 中有变量`summary`，则使用其为摘要。
->   - 上述都没有，Hugo 将自动提取内容的前 70 个单词作为摘要。
+> 📌 **注意**：Front matter 只需在与主题默认配置不一致时设置。
 
-### 4.2 内容组织
+③ **摘要生成规则**
 
-图片是文章常见的资源之一，你可以通过图床存储图片（引用绝对路径），或者将图片存储在本地目录（引用相对路径）。下面重点讲一下本地存储方式。
+摘要生成遵循以下优先顺序：
+
+- 有分隔符 `<!--more-->`，且前面没有内容，变量 `description` 作为摘要。
+
+- 有分隔符 `<!--more-->`，且前面有内容，则这部分内容作为摘要。
+
+- Front matter 中有变量 `summary`，则使用其为摘要。
+
+- 上述都没有，Hugo 将自动提取内容的前 70 个单词作为摘要。
+
+### 3.2 资源与文章管理
+
+① **图片存储方案**
+
+图片资源可通过图床和本地存储，前者引用绝对路径，后者引用相对路径。目录结构如下：
 
 ```text
 blog
-├─ assets
+├─ assets                 # 全局资源
 │  ├─ images
 │     ├─ pic001.png
 ├─ content
 │  └─ posts
-│     ├─ test001
+│     ├─ test001          # 文章专属资源
 │     │  ├─ index.md
 │     │  ├─ pic001.png
 │     │  └─ pic002.png
-├─ static
+├─ static                 # 公共资源
 │  ├─ images
 │     ├─ pic001.png
 ```
 
-使用[Page bundles](https://gohugo.io/content-management/page-bundles/)将一个或多个资源与内容逻辑关联，也就是直接使用相对于当前页面目录的文件路径来引用页面资源，如`![pic001](pic001.png)`。
+② **引用资源方法**
 
-使用“assets”或“static”目录存储图片资源，引用资源的文件路径是相对于该目录的，如`![pic001](./assets/pic001.png)`或`![pic001](./static/pic001.png)`。
+根据存储位置选择引用方式：
 
-> 📌 **注意**：
->
-> 图片的命名必须采用英文字符，如`pic001.png`，采用中文字符或有空格，图片将无法正常显示，如`图片 001.png`
+```markdown
+![图床图片](https://example.com/pic.jpg)
+![本地图片](pic.png) # Page bundles（与文章同一目录）
+![本地图片](/images/pic.png) # assets 或 static 目录资源
+```
 
-两种方式生成文章的命令有所不同，如果是第一种则用第一条命令，自行替换`title`字符，不要使用中文字符。生成后，你将在`content`目录找到对应的文件，打开进行修改即可。
+> Page bundles 将一个或多个资源与内容逻辑关联，也就是直接使用相对于当前页面目录的文件路径来引用页面资源。详细了解请参考 [Hugo 官方文档](https://gohugo.io/content-management/page-bundles/)。
+
+③ **创建新文章**
+
+在 Git Bash 终端输入以下任一命令：
 
 ```bash
+# 创建带资源目录的文章
 hugo new posts/title/index.md
+
+# 创建单文件文章
 hugo new posts/title.md
 ```
 
-此外，在构建和部署网站之前，新建`D:\Hugo\blog\README.md`文件，里面填写你对仓库的介绍即可，示例如下：
+> 📌 **重要**：
+>
+> - 文件名必须使用英文字符（中文字符可能导致显示问题）。
+> - 生成后编辑 `content/posts/` 下的对应文件。
+
+④ **添加仓库说明**
+
+创建 `README.md`，撰写你对博客的基础介绍。内容示例如下：
 
 ```markdown
-Hugo + FixIt 博客
+# Hugo + FixIt 博客
+
+基于 Hugo 静态网站生成器和 FixIt 主题搭建的个人博客
 ```
 
-## 5. 构建和部署
+## 4. 自动化部署
 
-[GitHub](https://github.com/)是一个基于 Git 版本控制系统的代码托管平台，提供静态网站托管服务（[GitHub Pages](https://docs.github.com/zh/pages/getting-started-with-github-pages)），可自动构建并发布 Hugo 生成的博客。[GitHub Actions](https://docs.github.com/zh/actions) 是其内置的自动化工具，只需提交代码，即可自动完成博客的构建、测试与在线发布。
+[GitHub](https://github.com/) 是一个基于 Git 的代码托管平台，提供静态网站托管服务（[GitHub Pages](https://docs.github.com/zh/pages/getting-started-with-github-pages)），可自动构建并发布 Hugo 生成的博客。[GitHub Actions](https://docs.github.com/zh/actions) 是其内置的自动化工具，通过提交代码自动完成博客的构建、测试与发布。
 
-![工作流程](pic5-1.png)
+![自动化部署流程](pic4-1.png)
 
-### 5.1 创建 GitHub 仓库
+### 4.1 配置 GitHub 仓库
 
-打开[Github](https://github.com/)，注册并登录账号，点击头像，选择“Your repositories”进入仓库，点击绿色按钮“New”新建仓库。
+① **创建仓库**
 
-GitHub 默认提供`.github.io`域名给用户使用，且具有唯一性，也就是说“Repository name”填写`owner.github.io`，将会生成<http://owner.github.io>网址，其它则会生成<http:/owner.github.io/XXX>网址。
+注册并登录 [Github](https://github.com/)，点击头像 → “Your repositories” → “New” 。“Repository name” 填写 `<用户名>.github.io`（将会生成 <http://用户名.github.io>），其余默认，完成后点击 “Create Repository”。
 
-![新建仓库](pic5-2.png)
+![新建仓库](pic4-2.png)
 
-点击“Create Repository”创建仓库，之后打开主题配置文件，修改以下内容，并修改站点配置文件的`baseURL`参数。
+② **配置部署源**
+
+点击仓库的 “Settings“ → ”Pages“ → ”Build and deployment”，将 “Source” 修改为 “GitHub Actions”。
+
+![开启 GitHub Actions](pic4-3.png)
+
+③ **修改站点配置**
+
+修改 `config/_default/hugo.toml`：
 
 ```toml
 baseURL = "https://<用户名>.github.io/"
@@ -253,45 +325,51 @@ enableGitInfo = true
     repo = "https://github.com/<用户名>/<用户名>.github.io/"
 ```
 
-点击仓库的“Settings->Pages->Build and deployment”，将“Source”修改为“GitHub Actions”。
-
-![GitHub Actions](pic5-3.png)
-
-### 5.2 配置 SSH 密钥
+### 4.2 设置 SSH 密钥
 
 SSH 密钥是一种安全的身份验证方法，用于在远程服务器和客户端之间建立安全连接。使用 SSH 密钥可以替代传统的密码身份验证，提供更高的安全性和便利性。
 
-Git Bash 终端输入以下命令（自行替换引号内的相应字段），中途会询问是否需要密码，直接按三次回车即可。
+① **生成密钥对**
+
+在 Git Bash 终端输入以下命令（替换引号内的相应字段），提示 "Enter passphrase" 时直接按三次回车（不设密码）。
 
 ```bash
 git config --global user.name "username"
 git config --global user.email  "user@email.com"
-ssh-keygen -t ed25519 -C "user@email.com"
-cat ~/.ssh/id_ed25519.pub
+ssh-keygen -t ed25519 -C "user@email.com"        # 按三次回车
+cat ~/.ssh/id_ed25519.pub                        # 复制输出的密钥
 ```
 
-复制密钥内容，回到 Github，点击头像，选择“Settings->“SSH and GPG keys”->“New SSH key”，粘贴密钥到`Key`位置，标题随意，填写后点击“Add SSH Key”。
+② **添加公钥到 GitHub**
 
-![SSH 密钥](pic5-4.png)
+回到 Github，点击头像 → “Settings“ → “SSH and GPG keys” → “New SSH key”，粘贴复制的密钥密钥到 `Key` 位置，标题随意，填写后点击 “Add SSH Key”。
 
-Git Bash 终端输入以下命令，出现“You've successfully authenticated……”，则表示配置成功。
+![添加 SSH 密钥](pic4-4.png)
+
+③ **验证连接**
+
+在 Git Bash 终端输入以下命令，出现 “You've successfully ……” 则配置成功。
 
 ```bash
 ssh -T git@github.com
 ```
 
-### 5.3 创建 Workflows
+### 4.3 创建 Workflows
 
-[Workflows](https://docs.github.com/zh/actions/writing-workflows/about-workflows)是 GitHub Actions 的自动化流水线，用一份配置文件定义“博客构建 → 测试 → 发布”步骤。后续每次推送代码到 GitHub，自动触发流程完成博客更新。
+[Workflows](https://docs.github.com/zh/actions/writing-workflows/about-workflows) 是 GitHub Actions 的自动化流水线，用一份配置文件定义 “博客构建 → 测试 → 发布” 步骤。后续每次推送代码到 GitHub，自动触发流程完成博客更新。
 
-Git Bash 终端输入以下命令：
+① **创建工作流文件**
+
+在 Git Bash 终端输入以下命令：
 
 ```bash
 mkdir -p .github/workflows
 touch .github/workflows/hugo.yaml
 ```
 
-此命令将在`D:\Hugo\blog\.github\workflows`目录生成`hugo.yaml`文件，复制并粘贴以下内容到该文件，并修改`HUGO_VERSION`参数值（执行`hugo version`命令可获取），如`0.147.8`。
+② **配置工作流内容**
+
+打开 `.github/workflows/hugo.yaml` 文件，粘贴以下内容并修改 `HUGO_VERSION` 参数值（执行 `hugo version` 命令可获取），如 `0.147.8`。
 
 ```yaml
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
@@ -390,9 +468,9 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-### 5.4 推送 GitHub 仓库
+③ **设置忽略文件**
 
-由于 GitHub Actions 会自动重建`public`目录，所以不推送该目录至 GitHub 仓库，且将该目录添加到`.gitignore`，Git Bash 终端输入以下命令：
+由于 GitHub Actions 会自动重建 `public` 目录，所以不推送该目录至 GitHub 仓库，且将该目录添加到 `.gitignore`，在 Git Bash 终端输入以下命令：
 
 ```bash
 cat > .gitignore <<EOL
@@ -406,23 +484,33 @@ cat > .gitignore <<EOL
 EOL
 ```
 
-Git Bash 终端输入以下命令，推送网站到 GitHub 仓库，记得将 git 地址替换成你的。
+### 4.4 推送与持续部署
+
+① **首次推送代码**
+
+在 Git Bash 终端输入以下命令，推送网站到 GitHub 仓库，记得将 git 地址替换成你的。
 
 ```bash
 git add -A
 git commit -m "first commit"
 git branch -M main
-git remote add origin git@github.com:username/username.github.io.git  # 记得修改git地址
+git remote add origin git@github.com:<用户名>/<用户名>.github.io.git
 git push -u origin main
 ```
 
-打开 GitHub 仓库，选择“Actions”，你将看到“All workflows”，当 GitHub 完成构建和部署网站后，状态指示器的颜色将变成绿色。
+② **监控部署状态**
 
-![workflows](pic5-5.png)
+打开 GitHub 仓库 “Actions” 页面，状态指示器的颜色变成绿色即表示成功部署。
 
-点击“Settings”->“Pages”->“GitHub Pages”->“Visit site”访问博客。
+![Actions](pic4-5.png)
 
-之后每当你从本地仓库推送更改时，只要在 Git Bash 终端输入以下命令，GitHub Actions 将自动重构你的网站并部署这些更改。自行替换引号内的内容，这表明你本次提交了什么更改。
+③ **访问博客网站**
+
+点击仓库的 “Settings” → “Pages” → “GitHub Pages” → “Visit site” 访问博客。
+
+④ **后续更新**
+
+方法一：在 Git Bash 终端输入以下命令，自行替换引号的内容，这表明你本次提交了什么更改。
 
 ```bash
 git add -A
@@ -430,7 +518,11 @@ git commit -m "修改v1.0"
 git push
 ```
 
-VSCode 具有源代码管理功能。初次命令行推送后，再次提交时`Ctrl+Shift+G`调出源代码管理窗口，
+方法二：VSCode 按 `Ctrl+Shift+G` 调出源代码管理窗口，在 “消息” 框输入本次提交的更改，然后点击 “提交” → “同步更改”。
+
+![源代码管理](pic4-6.png)
+
+> 每次推送后 GitHub Actions 将自动重建并部署你的博客。
 
 ## 参考内容
 
