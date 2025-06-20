@@ -19,15 +19,15 @@ collections: ["Hugo 博客"]
 
 ① **下载扩展版**
 
-打开 [Hugo Releases](https://github.com/gohugoio/hugo/releases) 下载标有 `extended` 且匹配操作系统的 `zip` 文件，要求版本 ≥ v0.146.0，如 `Hugo_extended_0.147.8_windows-arm64.zip`。
+打开 [Hugo Releases](https://github.com/gohugoio/hugo/releases) 下载标有 `extended` 且匹配操作系统的 `.zip` 文件，要求版本 ≥ v0.146.0，如 `Hugo_extended_0.147.8_windows-arm64.zip`。
 
 ② **解压与重命名**
 
-将下载的 `zip` 文件解压至 `D:\Hugo` 目录，并将解压后的文件夹重命名为 `bin`，最终路径应为 `D:\Hugo\bin`。
+将下载的 `.zip` 文件解压至 `D:\Hugo` 目录，并将解压后的文件夹重命名为 `bin` ，最终路径应为 `D:\Hugo\bin` 。
 
 ③ **设置环境变量**（❗❗）
 
-按 `Win+S` 搜索 “环境变量”，打开 “编辑系统环境变量”，在 “系统属性” 窗口点击 “环境变量”，在 “系统变量” 区域找到 `Path`，点击 “编辑” → “新建”，输入 `D:\Hugo\bin`，逐层点击 “确定” 保存。
+按 `Win+S` 搜索 “环境变量” ，打开 “编辑系统环境变量” ，在 “系统属性” 窗口点击 “环境变量” ，在 “系统变量” 区域找到 `Path` ，点击 “编辑” → “新建” ，输入 `D:\Hugo\bin` ，逐层点击 “确定” 保存。
 
 ④ **验证安装**
 
@@ -59,7 +59,7 @@ git version
 
 ① **下载安装**
 
-下载并安装 [VS Code](https://code.visualstudio.com/Download)，安装时在 “选择附加任务” 页面勾选所有复选框（特别是 “添加到 PATH”），其他选项保持默认。
+下载并安装 [VS Code](https://code.visualstudio.com/Download)，安装时在 “选择附加任务” 页面勾选所有复选框（特别是 “添加到 PATH” ），其他选项保持默认。
 
 ② **验证安装**
 
@@ -67,7 +67,7 @@ git version
 
 ③ **设置中文界面（可选）**
 
-打开 VSCode，按 `Ctrl+Shift+X` 调出扩展界面，搜索并安装 “Chinese (Simplified) Language Pack”。安装完成后点击右下角 “Restart Now” 重启生效。
+打开 VSCode，按 `Ctrl+Shift+X` 调出扩展界面，搜索并安装 “Chinese (Simplified) Language Pack” 。安装完成后点击右下角 “Restart Now” 重启生效。
 
 ## 2. 创建与配置站点
 
@@ -75,13 +75,13 @@ git version
 
 ① **打开终端**
 
-在 `D:\Hugo` 文件夹空白处右键选择 “通过 code 打开”，在 VSCode 顶部菜单栏点击 “终端” → “新建终端”，在底部面板点击 `+` 选择 “Git Bash”。
+在 `D:\Hugo` 文件夹空白处右键选择 “通过 code 打开” ，在 VSCode 顶部菜单栏点击 “终端” → “新建终端”，在底部面板点击 `+` 选择 “Git Bash” 。
 
 ![终端](pic2-1.png)
 
 ② **执行创建命令**
 
-在 Git Bash 终端输入以下命令将生成项目根目录( `D:\Hugo\blog`)：
+在 Git Bash 终端输入以下命令将生成项目根目录 ( `D:\Hugo\blog`)：
 
 ```bash
 hugo new site blog
@@ -116,7 +116,7 @@ echo "defaultContentLanguage = 'zh-cn'" >> hugo.toml
 
 ① **修改主配置**
 
-打开 `hugo.toml`，在末尾添加以下内容：
+打开 `hugo.toml` ，在末尾添加以下内容：
 
 ```toml
 ignoreLogs = ['warning-dev-version']  # 忽略开发版本警告
@@ -153,9 +153,9 @@ blog
 ```bash
 # 启动 Hugo 的开发服务器以查看站点
 hugo server                         # 基础预览
-hugo server -D                      # 包括标记为draft的内容
+hugo server -D                      # 包括标记为 draft 的内容
 hugo server -D --disableFastRender  # 在更改时启用完全重新渲染
-hugo server -e production           # 生产模式（支持评论/CDN）
+hugo server -e production           # 生产模式（支持评论 / CDN）
 # 按 Ctrl + C 停止 Hugo 的开发服务器
 ```
 
@@ -186,7 +186,7 @@ Front matter 是一组结构化元数据，通过标准化的字段描述文档�
 
 ① **复制模板文件**
 
-复制 `themes/FixIt/archetypes/posts.md` 到 `archetypes`文件夹。目录结构如下：
+复制 `themes/FixIt/archetypes/posts.md` 到 `archetypes` 文件夹。目录结构如下：
 
 ```text
 blog
@@ -205,7 +205,7 @@ blog
 
 ② **自定义模板内容**
 
-打开 `archetypes/posts.md`，按需保留所需的属性。示例如下：
+打开 `archetypes/posts.md` ，按需保留所需的属性。示例如下：
 
 ```toml
 ---
@@ -225,11 +225,11 @@ collections: ["合集"]
 
 摘要生成遵循以下优先顺序：
 
-- 有分隔符 `<!--more-->`，且前面没有内容，变量 `description` 作为摘要。
+- 有分隔符 `<!--more-->` ，且前面没有内容，变量 `description` 作为摘要。
 
-- 有分隔符 `<!--more-->`，且前面有内容，则这部分内容作为摘要。
+- 有分隔符 `<!--more-->` ，且前面有内容，则这部分内容作为摘要。
 
-- Front matter 中有变量 `summary`，则使用其为摘要。
+- Front matter 中有变量 `summary` ，则使用其为摘要。
 
 - 上述都没有，Hugo 将自动提取内容的前 70 个单词作为摘要。
 
@@ -286,7 +286,7 @@ hugo new posts/title.md
 
 ④ **添加仓库说明**
 
-创建 `README.md`，撰写你对博客的基础介绍。内容示例如下：
+创建 `README.md` ，撰写你对博客的基础介绍。内容示例如下：
 
 ```markdown
 # Hugo + FixIt 博客
@@ -304,13 +304,13 @@ hugo new posts/title.md
 
 ① **创建仓库**
 
-注册并登录 [Github](https://github.com/)，点击头像 → “Your repositories” → “New” 。“Repository name” 填写 `<用户名>.github.io`（将会生成 <http://用户名.github.io>），其余默认，完成后点击 “Create Repository”。
+注册并登录 [Github](https://github.com/)，点击头像 → “Your repositories” → “New” 。“Repository name” 填写 `<用户名>.github.io`（将会生成 <http://用户名。github.io>），其余默认，完成后点击 “Create Repository” 。
 
 ![新建仓库](pic4-2.png)
 
 ② **配置部署源**
 
-点击仓库的 “Settings“ → ”Pages“ → ”Build and deployment”，将 “Source” 修改为 “GitHub Actions”。
+点击仓库的 “Settings“ → ”Pages“ → ”Build and deployment” ，将 “Source” 修改为 “GitHub Actions” 。
 
 ![开启 GitHub Actions](pic4-3.png)
 
@@ -342,7 +342,7 @@ cat ~/.ssh/id_ed25519.pub                        # 复制输出的密钥
 
 ② **添加公钥到 GitHub**
 
-回到 Github，点击头像 → “Settings“ → “SSH and GPG keys” → “New SSH key”，粘贴复制的密钥密钥到 `Key` 位置，标题随意，填写后点击 “Add SSH Key”。
+回到 Github，点击头像 → “Settings“ → “SSH and GPG keys” → “New SSH key” ，粘贴复制的密钥密钥到 `Key` 位置，标题随意，填写后点击 “Add SSH Key” 。
 
 ![添加 SSH 密钥](pic4-4.png)
 
@@ -470,7 +470,7 @@ jobs:
 
 ③ **设置忽略文件**
 
-由于 GitHub Actions 会自动重建 `public` 目录，所以不推送该目录至 GitHub 仓库，且将该目录添加到 `.gitignore`，在 Git Bash 终端输入以下命令：
+由于 GitHub Actions 会自动重建 `public` 目录，所以不推送该目录至 GitHub 仓库，且将该目录添加到 `.gitignore` ，在 Git Bash 终端输入以下命令：
 
 ```bash
 cat > .gitignore <<EOL
@@ -514,11 +514,11 @@ git push -u origin main
 
 ```bash
 git add -A
-git commit -m "修改v1.0"
+git commit -m "修改 v1.0"
 git push
 ```
 
-方法二：VSCode 按 `Ctrl+Shift+G` 调出源代码管理窗口，在 “消息” 框输入本次提交的更改，然后点击 “提交” → “同步更改”。
+方法二：VSCode 按 `Ctrl+Shift+G` 调出源代码管理窗口，在 “消息” 框输入本次提交的更改，然后点击 “提交” → “同步更改” 。
 
 ![源代码管理](pic4-6.png)
 
