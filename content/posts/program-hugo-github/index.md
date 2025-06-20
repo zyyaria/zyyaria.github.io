@@ -1,6 +1,6 @@
 ---
-title: "Hugo+FixIt 自动化部署"
-description: "零基础构建个人博客：1. Hugo 环境部署 2. FixIt 主题配置 3. GitHub Actions 自动部署"
+title: "Hugo+GitHub 自动化部署"
+description: "零基础构建个人博客：1. Hugo 环境部署 2. FixIt 主题配置 3. GitHub Actions 自动发布"
 date: 2025-06-16T16:09:43+08:00
 lastmod: 2025-06-16T16:09:43+08:00
 categories: ["程序"]
@@ -298,7 +298,7 @@ hugo new posts/title.md
 
 [GitHub](https://github.com/) 是一个基于 Git 的代码托管平台，提供静态网站托管服务（[GitHub Pages](https://docs.github.com/zh/pages/getting-started-with-github-pages)），可自动构建并发布 Hugo 生成的博客。[GitHub Actions](https://docs.github.com/zh/actions) 是其内置的自动化工具，通过提交代码自动完成博客的构建、测试与发布。
 
-![自动化部署流程](pic4-1.png)
+![操作流程](pic4-1.png)
 
 ### 4.1 配置 GitHub 仓库
 
