@@ -25,7 +25,7 @@ collections: ["Hugo 博客"]
 
 打开 `config/_default/hugo.toml` 文件，修改 `baseURL` 参数。
 
-```
+```toml
 baseURL = "https://<用户名>.netlify.app/"
 ```
 
