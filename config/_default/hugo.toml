@@ -1047,7 +1047,7 @@ mainSections = []
     # 修复 0.2.18 |NEW 是否开启 instant.page
     instantPage = false
     # 修复 0.3.0 |新增 侧边栏是否开启收藏列表
-    collectionList = false
+    collectionList = true
     # 修复 0.3.0 |NEW 是否在文章末尾启用集合导航
     collectionNavigation = true
 

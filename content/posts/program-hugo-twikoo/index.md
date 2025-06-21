@@ -1,6 +1,6 @@
 ---
 title: "Netlify 部署 Twikoo 评论系统"
-description: "免服务器评论系统方案：1. 创建 MongoDB 免费集群 2. 部署 Twikoo 服务到 Netlify 3. 开启 Hugo 评论功能"
+description: "无服务器搭建评论系统：1. 创建 MongoDB 免费集群 2. 部署 Twikoo 服务到 Netlify 3. 开启 Hugo 评论功能"
 date: 2025-06-21T17:34:05+08:00
 lastmod: 2025-06-21T17:34:05+08:00
 categories: ["程序"]
@@ -9,13 +9,9 @@ collections: ["Hugo 博客"]
 
 <!--more-->
 
-[Twikoo](https://twikoo.js.org/) 是一个简洁、安全、免费的静态网站评论系统。自建服务器或独立托管平台部署 Twikoo 评论系统需要多平台维护，增加复杂难度。[Netlify](https://app.netlify.com/) 平台提供的一体化部署能力，让我们实现：
+静态博客集成评论系统常需自建服务器或依赖第三方平台，带来维护负担与安全隐患。如何构建低成本自主可控的评论系统？本文通过 Netlify + MongoDB 部署 [Twikoo](https://twikoo.js.org/) 评论系统，实现 Hugo 博客的零成本自主评论系统，用户直接管理评论数据。
 
-1. **全栈统一管理**：Hugo 前端与 Twikoo 后端同平台部署，免除多服务切换。
-2. **零成本高性能**：Netlify 函数（免费 125k 次/月）+ MongoDB 免费层实现永久免费架构。
-3. **分钟级自动化**：代码提交触发全球 CDN 即时生效，评论数据安全分离存储。
-
-本文涵盖「MongoDB 配置 → Twikoo 服务部署 → Hugo 集成」全流程，10 分钟实现免运维评论系统。
+![操作流程](pic0-1.png)
 
 ## 1. 准备 MongoDB 数据库
 

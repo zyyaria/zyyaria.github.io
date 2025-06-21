@@ -9,11 +9,7 @@ collections: ["Hugo 博客"]
 
 <!--more-->
 
-[GitHub Pages](https://docs.github.com/zh/pages/getting-started-with-github-pages) 作为静态站点基础托管方案，其国内访问速度受限于无 CDN 优化，且需依赖 [GitHub Actions](https://docs.github.com/zh/actions) 脚本实现自动化部署，维护成本较高。[Netlify](https://docs.netlify.com/) 提供更优解决方案：
-
-1. **访问加速**：全球 200+ CDN 节点（含香港/新加坡），实测国内加载速度提升 3 倍。
-2. **流程简化**：原生支持 Hugo 构建，替代 Actions 脚本。
-3. **功能扩展**：无缝集成评论/表单等动态功能。
+GitHub Pages 国内访问缓慢且依赖脚本维护，影响内容分发效率。如何同步提升访问速度与简化部署操作？本文采用 [Netlify](https://docs.netlify.com/) 迁移方案，通过全球 CDN 加速优化访问体验，原生支持 Hugo 自动化构建流程。
 
 ![操作流程](pic0-1.png)
 
