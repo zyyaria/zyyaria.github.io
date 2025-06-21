@@ -65,38 +65,6 @@ baseURL = "https://<用户名>.netlify.app/"
 
 ![Open production deploy](pic2-2.png)
 
-## 3. 仓库改名（可选）
-
-### 3.1 远程仓库修改
-
-登录 [GitHub](http://github.com/) 仓库，进入 “Settings” → “General” → “Repository name” ，修改原名称（ `<用户名>.github.io` ）为新名称（如 `hugo` ），点击 “Rename” 按钮确认。
-
-### 3.2 本地仓库更新
-
-打开 `config/_default/hugo.toml` 文件，修改一下内容：
-
-```toml
-  [params.gitInfo]
-    repo = "https://github.com/<用户名>/<远程仓库新名称>"
-```
-
-在根目录打开 Git Bash 终端，输入以下命令，将 git 地址替换成自己的：
-
-```bash
-git remote set-url origin git@github.com:<用户名>/<远程仓库新名称>.git
-```
-
-在 Git Bash 终端输入以下命令，测试连接效果：
-
-```bash
-git commit --allow-empty -m "测试仓库改名后连接"
-git push origin main
-```
-
-### 3.3 更新 Netlify 配置
-
-登录 [Netlify 控制台](https://app.netlify.com/)，进入“Projects” → “Project comfiguration”  → “Build & deploy” ，
-
 ## 参考内容
 
 1. [Netlify Docs](https://docs.netlify.com/)
