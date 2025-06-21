@@ -9,7 +9,7 @@ collections: ["Hugo 博客"]
 
 <!--more-->
 
-Twikoo 是一个简洁、安全、免费的静态网站评论系统。自建服务器或独立托管平台部署 Twikoo 评论系统需要多平台维护，增加复杂难度。Netlify 平台提供的一体化部署能力，让我们实现：
+[Twikoo](https://twikoo.js.org/) 是一个简洁、安全、免费的静态网站评论系统。自建服务器或独立托管平台部署 Twikoo 评论系统需要多平台维护，增加复杂难度。[Netlify](https://app.netlify.com/) 平台提供的一体化部署能力，让我们实现：
 
 1. **全栈统一管理**：Hugo 前端与 Twikoo 后端同平台部署，免除多服务切换。
 2. **零成本高性能**：Netlify 函数（免费 125k 次/月）+ MongoDB 免费层实现永久免费架构。
