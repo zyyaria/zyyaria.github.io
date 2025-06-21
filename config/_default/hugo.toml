@@ -1183,7 +1183,7 @@ mainSections = []
       Mix = false
     # 修复 0.2.15 |CHANGED 注释配置
     [params.page.comment]
-      enable = false
+      enable = true
       # 修复 0.2.13 |新增 Artalk 评论配置（https://artalk.js.org/）
       [params.page.comment.artalk]
         enable = false
