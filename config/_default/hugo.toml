@@ -1212,7 +1212,7 @@ mainSections = []
         versionCheck = true
       # Disqus 评论配置（https://disqus.com）
       [params.page.comment.disqus]
-        enable = false
+        enable = true
         # Disqus 短名称在帖子中使用 Disqus
         shortname = ""
       # Gitalk 评论配置（https://github.com/gitalk/gitalk）
@@ -1295,16 +1295,16 @@ mainSections = []
         darkTheme = "github-dark"
       # 修复 0.2.13 |新增 Twikoo 评论配置（https://twikoo.js.org/）
       [params.page.comment.twikoo]
-        enable = false
-        envId = ""
+        enable = true
+        envId = "https://arianote-twikoo.netlify.app/.netlify/functions/twikoo"
         region = ""
         path = ""
         visitor = true
         commentCount = true
         # 修复 0.2.17 |CHANGED 启用 Lightgallery 支持
-        lightgallery = false
+        lightgallery = true
         # 修复 0.2.17 |全新 启用 Katex 支持
-        katex = false
+        katex = true
       # 修复 0.2.14 |新的 Giscus 评论配置
       [params.page.comment.giscus]
         enable = false

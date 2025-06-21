@@ -45,6 +45,8 @@ baseURL = "https://<用户名>.netlify.app/"
 
 点击 “Project” → “Import from Git” ，选择 “GitHub” → “Authorize netlify” ，在仓库列表选择你的 Hugo 项目仓库。
 
+> 📌 **首次登录 Netlify 用户**：点击 “Configure Netlify on GitHub”，通过选择你的 GitHub 账户来安装 Netlify 应用，点击 “Install” 按钮，点击列表中的 Hugo 项目仓库。
+
 进入 “Configure project and deploy” 页面，修改以下内容：
 
 ① `Project name` ：填写上面 `baseURL` 参数的 `<用户名>` 。若显示被占用，则换另一个，同步修改 `baseURL` 参数，并再次从本地推送修改至 GitHub 仓库。
@@ -61,10 +63,11 @@ baseURL = "https://<用户名>.netlify.app/"
 
 ![Published](pic2-1.png)
 
-点击 “Open production deploy” 按钮查看现场站点。
+点击 “Open production deploy” 按钮查看站点。
 
 ![Open production deploy](pic2-2.png)
 
 ## 参考内容
 
 1. [Netlify Docs](https://docs.netlify.com/)
+1. [Host on Netlify](https://gohugo.io/host-and-deploy/host-on-netlify/)
